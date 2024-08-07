@@ -4,7 +4,7 @@ import React from "react";
 const KYCPage = () => {
   return (
     <View>
-      <Text>KYCPage</Text>
+      <Text>KYCPage IN</Text>
     </View>
   );
 };
