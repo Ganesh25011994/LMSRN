@@ -22,6 +22,10 @@ import {
   dbServices,
 } from "@/services";
 import { dbopsZonalMasters } from "@/services";
+import * as AppType from "@/apptypes/AppTypes";
+
+export let apiURL = AppType.APIURL.UATURL;
+
 // eslint-disable-next-line max-lines-per-function
 const MasterPage = () => {
   const { updatemaster } = useLocalSearchParams<Record<string, string>>(); // fetch all masters
@@ -32,12 +36,12 @@ const MasterPage = () => {
     useState<Master[]>(masterData);
   const headers: HeaderParams = {
     username: "60011",
-    password: "516edd40eedbe8194bc0e743fe75c59b",
+    password: "'516edd40eedbe8194bc0e743fe75c59b'",
   };
 
   const getZonalData = async () => {
     const response = await axios.request({
-      url: `https://onlineucolps.in:450/lendperfect/organisationsetup/`,
+      url: `${apiURL}/organisationsetup/`,
       method: "GET",
     });
     // setZonalList(response.data.zonalList);
@@ -53,7 +57,7 @@ const MasterPage = () => {
 
   const getBranchData = async (loginid: string) => {
     const response = await axios.request({
-      url: `https://onlineucolps.in:450/lendperfect/${Endpoints.branchMaster}/${loginid}`,
+      url: `${apiURL}/${Endpoints.branchMaster}/${loginid}`,
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +79,7 @@ const MasterPage = () => {
     let lovArray: Lov[] = [];
     LovReferenceKey.forEach(async ({ name, id }) => {
       const response = await axios.request({
-        url: `https://onlineucolps.in:450/lendperfect/${Endpoints.lovMaster}/${name}`,
+        url: `${apiURL}/${Endpoints.lovMaster}/${name}`,
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -84,13 +88,19 @@ const MasterPage = () => {
         },
       });
       const lovCollection = response.data?.refereceData;
+
       if (lovCollection.length > 0) {
         const lovArrayWithMasterID = lovCollection.map((lov: any) => ({
           ...lov,
           masterid: id,
         }));
-        lovArray = [...lovArray, lovArrayWithMasterID];
-        lovArray.forEach((val) => {
+        // console.log("getLOvData-lovArrayWithMasterID", lovArrayWithMasterID);
+        // lovArray = [...lovArray, ...lovArrayWithMasterID];
+        lovArrayWithMasterID.forEach((val: Lov) => {
+          // let valuearray: any = val;
+          // valuearray.forE;
+          // console.log("valuearray.length", valuearray.length);
+
           dbopsStaticDataMasters.save(val);
         });
         const temp = [...mastersNotDownloaded];
@@ -102,7 +112,7 @@ const MasterPage = () => {
 
   const getStatesData = async () => {
     const response = await axios.request({
-      url: `https://onlineucolps.in:450/lendperfect/getStatesList/indian_states`,
+      url: `${apiURL}/getStatesList/indian_states`,
       method: "GET",
     });
     //  setStates(response.data.response);
@@ -124,7 +134,7 @@ const MasterPage = () => {
 
   const getMainProducts = async () => {
     const response = await axios.request({
-      url: `https://onlineucolps.in:450/lendperfect/web/getMainAndSubCategory`,
+      url: `${apiURL}/web/getMainAndSubCategory`,
       method: "GET",
     });
     if ("lpstpMainFacilitylist" in response.data) {
@@ -164,23 +174,24 @@ const MasterPage = () => {
     if (updatemaster) {
       // if updatemaster query param true , all the masterdata in tables will be deleted
       // and fresh insert will happen
+      // for my self
       dbServices
         .deleteTableDataByTableNames([
-          DBSchemaConstants.ORIG_ZONAL_MASTER,
-          DBSchemaConstants.ORIG_BRANCH_MASTER,
-          DBSchemaConstants.ORIG_STATIC_DATA_MASTERS,
-          DBSchemaConstants.ORIG_STATE_MASTERS,
-          DBSchemaConstants.ORIG_CITY_MASTERS,
-          DBSchemaConstants.PRODUCT_MAIN_CATEGORY,
-          DBSchemaConstants.PRODUCT_SUB_CATEGORY,
+          // DBSchemaConstants.ORIG_ZONAL_MASTER,
+          // DBSchemaConstants.ORIG_BRANCH_MASTER,
+          // DBSchemaConstants.ORIG_STATIC_DATA_MASTERS,
+          // DBSchemaConstants.ORIG_STATE_MASTERS,
+          // DBSchemaConstants.ORIG_CITY_MASTERS,
+          // DBSchemaConstants.PRODUCT_MAIN_CATEGORY,
+          // DBSchemaConstants.PRODUCT_SUB_CATEGORY,
         ])
         .then(() => {
           try {
-            getZonalData();
-            getBranchData("60011");
-            getMainProducts();
-            getStatesData();
-            getLovData();
+            // getZonalData();
+            // getBranchData("60011");
+            // getMainProducts();
+            // getStatesData();
+            // getLovData();
             loadData();
           } catch (error) {
             alert(`${error}`);

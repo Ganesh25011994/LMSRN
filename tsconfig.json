@@ -9,6 +9,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "./src/**/*.ts",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "components/CustomButton.jsx",

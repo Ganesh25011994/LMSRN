@@ -20,7 +20,7 @@ export const save = async (data: Record<string, string | number | null>) => {
   console.log(columns);
   try {
     const query = `INSERT INTO ${table} (${columns})
-    VALUES ("${data.vertical}", "${data.facDesc}", "${data.facId}", "${data.facParentID}")`;
+    VALUES ("${data.lsfBizVertical}", "${data.lsfFacDesc}", "${data.lsfFacId}", "${data.lsfFacParentId}")`;
     console.log(query);
     await db.execAsync(query);
     console.info(`inser table ${table} success`);
@@ -33,9 +33,10 @@ export const save = async (data: Record<string, string | number | null>) => {
 export const findAll = async () => {
   const db = await prepareDB();
   const allRows = await db.getAllAsync(`SELECT * FROM ${table}`);
-  for (const row of allRows) {
-    console.log(JSON.stringify(row));
-  }
+  // for (const row of allRows) {
+  //   console.log(JSON.stringify(row));
+  // }
+  return allRows;
 };
 
 export const deleteAll = async () => {

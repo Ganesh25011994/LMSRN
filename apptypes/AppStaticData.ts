@@ -12,7 +12,7 @@ export const SourcingFormInitialData = {
   sourcingid: "",
   preferredbranch: "",
   businessdescription: "",
-  sourcingchannel: "",
+  sourcingChannel: "",
   sourcingname: "",
   branchcode: "",
   leadby: "",
@@ -23,12 +23,93 @@ export const SourcingFormInitialData = {
   productinterested: "",
 };
 
+export const PetsonalFormInitialData = {
+  customerType: "",
+  cbsId: "",
+  leadCategory: "",
+  constitution: "",
+  title: "",
+  applicantName: "",
+  entityName: "",
+  nameOfKarta: "",
+  dateOfBirth: "",
+  dateOfInc: "",
+  age: "",
+  gender: "",
+  mobileNum: "",
+  emailId: "",
+  employmentType: "",
+  noOfDependents: "",
+  wheatherUcoStaff: "",
+  empNo: "",
+  yearsinService: "",
+  cin: "",
+  registered: "",
+  registrationNo: "",
+  gstNumber: "",
+  udyogNumber: "",
+  partnerRegNum: "",
+  dateOfPartner: "",
+  trustRegNum: "",
+  dateOfTrust: "",
+  deedOfDec: "",
+  addressLine1: "",
+  addressLine2: "",
+  state: "",
+  city: "",
+  pinCode: "",
+  isCoApp: "",
+  profileImg: "",
+  latitude: "",
+  longitude: "",
+};
+
+export const KYCFormInitialData = {
+  applicantType: "",
+  panNo: "",
+  uidAadharNo: "",
+  otherIdProof: "",
+  otherIdNo: "",
+};
+
+export const IncomeFormInitialData = {
+  occupation: "",
+  grossIncome: "",
+  grossMonthlyDeductions: "",
+  netIncome: "",
+  networth: "",
+  company: "",
+  totYearsOfEmp: "",
+};
+
+export const LoanFormInitialData = {
+  mainCategory: "",
+  subCategory: "",
+  loanProduct: "",
+  newPurposeOfLoan: "",
+  loanAmountRequested: "",
+};
+
 export const OrganizationMasterColumns: KeyValueString = {
   orgCode: "TEXT",
   orgId: "TEXT",
   orgLevel: "TEXT",
   orgName: "TEXT",
   orgScode: "TEXT",
+};
+
+export const LoanProductColumns: KeyValueString = {
+  subCode: "Text",
+  lpdPrdType: "TEXT",
+  lpdProdId: "TEXT",
+  lpdHlType: "TEXT",
+  lpdPrdDesc: "TEXT",
+};
+
+export const LoanPurposeColumns: KeyValueString = {
+  selectedLoan: "TEXT",
+  optionValue: "TEXT",
+  optionDescription: "TEXT",
 };
 
 export const ProductMasterColumns: KeyValueString = {

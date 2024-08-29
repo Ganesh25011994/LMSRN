@@ -20,7 +20,7 @@ export const save = async (data: Record<string, string | number | null>) => {
   console.log(columns);
   try {
     const query = `INSERT INTO ${table} (${columns})
-    VALUES ("${data.vertical}", "${data.facDesc}", "${data.facId}", "${data.facParentID}")`;
+    VALUES ("${data.lsfBizVertical}", "${data.lsfFacDesc}", "${data.lsfFacId}", "${data.lsfFacParentId}")`;
     console.log(query);
     await db.execAsync(query);
     console.info(`inser table ${table} success`);
@@ -36,6 +36,22 @@ export const findAll = async () => {
   for (const row of allRows) {
     console.log(JSON.stringify(row));
   }
+};
+
+export const findByfacParentID = async (parentID: string) => {
+  const db = await prepareDB();
+  const allRows = await db.getAllAsync(
+    `SELECT * FROM ${table} WHERE facParentID=${parentID}`
+  );
+  return allRows;
+};
+
+export const findByfasID = async (parentID: string) => {
+  const db = await prepareDB();
+  const allRows = await db.getAllAsync(
+    `SELECT * FROM ${table} WHERE facId=${parentID}`
+  );
+  return allRows;
 };
 
 export const deleteAll = async () => {

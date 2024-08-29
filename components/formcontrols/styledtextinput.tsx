@@ -25,6 +25,7 @@ const Styledtextinput = ({
         className="p-2 mt-2 ml-2 border-b border-gray-100"
         onChangeText={formikProps.handleChange(formikkey)}
         onBlur={formikProps.handleBlur(formikkey)}
+        value={formikProps.values[formikkey]}
         {...rest}
       />
       <Text className="text-error px-3 ">

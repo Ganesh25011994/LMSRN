@@ -29,10 +29,10 @@ export const save = async (data: Record<string, string | number | null>) => {
     VALUES ("${orgCode}", "${orgId}", "${orgLevel}", "${orgName}", "${orgScode}")`;
     console.log(query);
     await db.execAsync(query);
-    console.info(`inser table ${DBSchemaConstants.ORIG_ZONAL_MASTER} success`);
+    console.info(`insert table ${DBSchemaConstants.ORIG_ZONAL_MASTER} success`);
   } catch (error) {
     console.error(
-      `inser table ${DBSchemaConstants.ORIG_ZONAL_MASTER} error : ${error}`
+      `insert table ${DBSchemaConstants.ORIG_ZONAL_MASTER} error : ${error}`
     );
   }
 };

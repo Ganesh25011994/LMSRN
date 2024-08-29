@@ -61,8 +61,8 @@ const Home = () => {
           >
             <TouchableOpacity
               className=""
-              // onPress={() => router.push("(leadtabs)/sourcing")}
-              onPress={testTable}
+              onPress={() => router.push("(leadtabs)/sourcing")}
+              // onPress={testTable}
             >
               <Ionicons name="add" size={24} color="black" />
             </TouchableOpacity>

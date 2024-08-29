@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import InboxCard from "./InboxCard";
+import { router } from "expo-router";
 
 export type DashboardProps = {
   otherStyle: string;
@@ -21,6 +22,7 @@ const Dashboard = ({ otherStyle }: DashboardProps) => {
           leftMarginColor="bg-green"
           countStyle="text-green text-2xl"
           subtitle="All assigned leads comes here"
+          onRoute={() => router.push("assignedLeads")}
         />
 
         <InboxCard
@@ -30,6 +32,7 @@ const Dashboard = ({ otherStyle }: DashboardProps) => {
           leftMarginColor="bg-purple"
           countStyle="text-purple text-2xl"
           subtitle="All incomplete leads comes here"
+          onRoute={() => router.push("incompleteLeads")}
         />
 
         <InboxCard
@@ -39,6 +42,7 @@ const Dashboard = ({ otherStyle }: DashboardProps) => {
           leftMarginColor="bg-yellow"
           countStyle="text-secondary text-xl"
           subtitle="All completed leads comes here"
+          onRoute={() => router.push("completeLeads")}
         />
       </View>
     </View>

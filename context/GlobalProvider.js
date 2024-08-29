@@ -8,6 +8,8 @@ export const GlobalProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [userLeadId, setUserLeadID] = useState("");
+  const [sourcingData, setSourcingData] = useState([]);
 
   useEffect(() => {
     getCurrentUser()
@@ -15,9 +17,13 @@ export const GlobalProvider = ({ children }) => {
         if (res) {
           setIsLoggedIn(true);
           setUser(res);
+          setUserLeadID("");
+          setSourcingData([]);
         } else {
           setIsLoggedIn(false);
           setUser(null);
+          setUserLeadID("");
+          setSourcingData([]);
           setIsLoading(false);
         }
       })
@@ -28,6 +34,7 @@ export const GlobalProvider = ({ children }) => {
         setIsLoading(false);
       });
   });
+
   return (
     <GlobalContext.Provider
       value={{
@@ -35,6 +42,10 @@ export const GlobalProvider = ({ children }) => {
         setIsLoggedIn,
         user,
         setUser,
+        userLeadId,
+        setUserLeadID,
+        sourcingData,
+        setSourcingData,
         isLoading,
         setIsLoading,
       }}

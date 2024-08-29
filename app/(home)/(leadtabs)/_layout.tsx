@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   createMaterialTopTabNavigator,
   MaterialTopTabNavigationOptions,
@@ -14,7 +14,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 const { Navigator } = createMaterialTopTabNavigator();
-
+import { EventEmitter } from "../../../constants/event";
 export const MaterialTopTabs = withLayoutContext<
   MaterialTopTabNavigationOptions,
   typeof Navigator,
@@ -23,6 +23,31 @@ export const MaterialTopTabs = withLayoutContext<
 >(Navigator);
 
 const TopTabLayout = () => {
+  const [sourceTick, setSoucingTick] = useState(false);
+  const [personalTick, setPersonalTick] = useState(false);
+  const [kycTick, setKYCTick] = useState(false);
+  const [incomeTick, setIncomeTick] = useState(false);
+  const [loanTick, setLoanTick] = useState(false);
+  const [documentTick, setDocumentTick] = useState(false);
+  const [submitTick, setSubmitTick] = useState(false);
+  useEffect(() => {
+    EventEmitter.subscribe("submit", (event: any) => {
+      console.log("submit Event", event);
+      if (event == "sourceTick") {
+        setSoucingTick(true);
+      } else if (event == "personalTick") {
+        setPersonalTick(true);
+      } else if (event == "kycTick") {
+        setKYCTick(true);
+      }
+    });
+  });
+
+  useEffect(() => {
+    return () => {
+      console.log("sourcing tab is closed");
+    };
+  }, []);
   return (
     <>
       <SubHeader />
@@ -38,9 +63,12 @@ const TopTabLayout = () => {
                 color="black"
               />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+
+            tabBarBadge: sourceTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
         <MaterialTopTabs.Screen
@@ -50,11 +78,14 @@ const TopTabLayout = () => {
             tabBarIcon: () => (
               <Fontisto name="persons" size={24} color="black" />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+            tabBarBadge: personalTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
+
         <MaterialTopTabs.Screen
           name="kyc"
           options={{
@@ -62,9 +93,11 @@ const TopTabLayout = () => {
             tabBarIcon: () => (
               <Ionicons name="id-card-outline" size={24} color="black" />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+            tabBarBadge: kycTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
         <MaterialTopTabs.Screen
@@ -74,9 +107,11 @@ const TopTabLayout = () => {
             tabBarIcon: () => (
               <FontAwesome5 name="coins" size={24} color="black" />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+            tabBarBadge: incomeTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
         <MaterialTopTabs.Screen
@@ -86,9 +121,11 @@ const TopTabLayout = () => {
             tabBarIcon: () => (
               <Ionicons name="list-outline" size={24} color="black" />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+            tabBarBadge: loanTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
         <MaterialTopTabs.Screen
@@ -102,9 +139,11 @@ const TopTabLayout = () => {
                 color="black"
               />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+            tabBarBadge: documentTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
         <MaterialTopTabs.Screen
@@ -114,9 +153,11 @@ const TopTabLayout = () => {
             tabBarIcon: () => (
               <FontAwesome name="upload" size={24} color="black" />
             ),
-            tabBarBadge: () => (
-              <FontAwesome5 name="check-circle" size={16} color="green" />
-            ),
+            tabBarBadge: submitTick
+              ? () => (
+                  <FontAwesome5 name="check-circle" size={16} color="green" />
+                )
+              : undefined,
           }}
         />
       </MaterialTopTabs>

@@ -17,6 +17,10 @@ export type StyledDropdownProps = {
   title: string;
   mandatory: boolean;
   formikkey: string;
+  dropdownData?: any;
+  dropLableProperty?: string;
+  dropValueProperty?: any;
+  onChangeDrobDown?: Function;
 };
 
 const StyledDropdown = ({
@@ -25,6 +29,10 @@ const StyledDropdown = ({
   title,
   mandatory,
   formikkey,
+  dropdownData,
+  dropLableProperty,
+  dropValueProperty,
+  onChangeDrobDown,
 }: StyledDropdownProps) => {
   return (
     <View>
@@ -39,20 +47,25 @@ const StyledDropdown = ({
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
-        data={data}
+        data={dropdownData ? dropdownData : data}
         search
         maxHeight={700}
-        labelField="label"
-        valueField="value"
+        labelField={dropLableProperty ? dropLableProperty : ""}
+        valueField={dropValueProperty ? dropValueProperty : ""}
         placeholder={placeholder}
         searchPlaceholder="Search..."
         value={formikProps.values[formikkey]}
         onChange={(item) => {
-          formikProps.setFieldValue(formikkey, item.value);
-          console.log(`value => ${JSON.stringify(formikProps)}
-                touched => ${formikProps.touched[formikkey]}
-                error => ${formikProps.errors[formikkey]}
-                `);
+          if (onChangeDrobDown) {
+            formikProps.setFieldValue(formikkey, item[dropValueProperty]);
+            onChangeDrobDown(item[dropValueProperty]);
+          } else {
+            formikProps.setFieldValue(formikkey, item[dropValueProperty]);
+            // console.log(`value => ${JSON.stringify(formikProps)}
+            //       touched => ${formikProps.touched[formikkey]}
+            //       error => ${formikProps.errors[formikkey]}
+            //       `);
+          }
         }}
       />
       <Text className="text-error px-3 pb-1 ">

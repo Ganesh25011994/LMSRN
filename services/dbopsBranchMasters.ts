@@ -37,9 +37,10 @@ export const save = async (data: Record<string, string | number | null>) => {
 export const findAll = async () => {
   const db = await prepareDB();
   const allRows = await db.getAllAsync(`SELECT * FROM ${table}`);
-  for (const row of allRows) {
-    console.log(JSON.stringify(row));
-  }
+  // for (const row of allRows) {
+  //   console.log(JSON.stringify(row));
+  // }
+  return allRows;
 };
 
 export const deleteAll = async () => {

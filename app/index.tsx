@@ -1,4 +1,11 @@
-import { Image, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  ScrollView,
+  Text,
+  View,
+  BackHandler,
+  Alert,
+} from "react-native";
 import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { router } from "expo-router";
@@ -10,6 +17,7 @@ import * as WebBrowser from "expo-web-browser";
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
 import { useDBUtils } from "../hooks/useDBUtils";
 import { TestUser } from "@/apptypes";
+import * as Linking from "expo-linking";
 WebBrowser.maybeCompleteAuthSession();
 
 // zoho oauth endpoint
@@ -53,6 +61,27 @@ lms app does not have SSO , refer for SSO requirement
   const { isLoading, isLoggedIn } = useGlobalContext();
   if(!isLoading && isLoggedIn) return (<Redirect href="/home"/>)
   */
+
+  const backAction = () => {
+    // Alert.alert("Hold on!", "Are you sure you want to go back?", [
+    //   {
+    //     text: "Cancel",
+    //     onPress: () => null,
+    //     style: "cancel",
+    //   },
+    //   { text: "YES", onPress: () => BackHandler.exitApp() },
+    // ]);
+    // return true;
+    // return true;
+  };
+
+  useEffect(() => {
+    // const backHandler = BackHandler.addEventListener(
+    //   "hardwareBackPress",
+    //   backAction
+    // );
+    // return () => backHandler.remove();
+  });
 
   const handleRoute = () => {
     router.push("master/?updatemaster=true");

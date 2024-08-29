@@ -15,6 +15,8 @@ import {
 import { OrganizationMasterColumns, ProductMasterColumns } from "@/apptypes";
 import {
   CityMasterColumns,
+  LoanProductColumns,
+  LoanPurposeColumns,
   StateMasterColumns,
 } from "@/apptypes/AppStaticData";
 import { DBSchemaConstants } from "@/constants";
@@ -91,6 +93,22 @@ export const useDBUtils = () => {
       });
 
       getTotalRowsByTableName(DBSchemaConstants.PRODUCT_SUB_CATEGORY);
+
+      createTable(db, {
+        tableName: DBSchemaConstants.LOAN_PRODUCT_MASTER,
+        pk: DBSchemaConstants.LOAN_PRODUCT_ID,
+        tableData: LoanProductColumns,
+      });
+
+      getTotalRowsByTableName(DBSchemaConstants.LOAN_PRODUCT_MASTER);
+
+      createTable(db, {
+        tableName: DBSchemaConstants.LOAN_PURPOSE_MASTER,
+        pk: DBSchemaConstants.LOAN_PURPOSE_ID,
+        tableData: LoanPurposeColumns,
+      });
+
+      getTotalRowsByTableName(DBSchemaConstants.LOAN_PURPOSE_MASTER);
     }
     return () => {
       db?.closeAsync();
